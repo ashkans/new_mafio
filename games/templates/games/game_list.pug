@@ -1,0 +1,42 @@
+extends base.pug
+
+- load i18n
+
+block options
+  if perms.games.add_game
+    a.btn.btn-sm.btn-outline-secondary(
+      href="{% url 'game_create' %}"
+    )
+      {% trans 'Add game' %}
+      i.fa.fa-plus
+
+block content
+
+  table.table.table-striped.table-hover.table-sm
+    thead
+      tr
+        th Id
+        th {% trans 'name'|capfirst %}
+        if perms.games.change_game or perms.games.delete_game
+          th
+    tbody
+      for game in object_list
+        tr
+          td
+            a(href="{{ game.get_absolute_url }}")
+              | {{game.id}}
+          td
+            a(href="{{ game.get_absolute_url }}")
+              | {{game}}
+          if perms.games.change_game or perms.games.delete_game
+            td.text-right
+              if perms.games.change_game
+                a.btn.btn-sm.btn-outline-secondary(href="{% url 'game_update' game.id %}")
+                  {% trans 'Update game' %}
+                  i.fa.fa-edit
+              if perms.games.delete_game
+                a.btn.btn-sm.btn-danger(href="{% url 'game_delete' game.id %}")
+                  {% trans 'Delete game' %}
+                  i.fa.fa-times
+
+  {% include 'includes/pagination.pug' %}

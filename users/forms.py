@@ -106,7 +106,7 @@ class AuthenticationForm(forms.Form):
 class CaptchaAuthenticationForm(AuthenticationForm):
     """ a user authentication form with a captcha """
     captcha = ReCaptchaField(
-        label="¿Eres humano?",
+        label="?Captcha?",
     )
 
 
@@ -243,7 +243,7 @@ class UserCreationForm(BaseModelForm):
 class CaptchaUserCreationForm(UserCreationForm):
     """ a user creation form with a captcha """
     captcha = ReCaptchaField(
-        label="¿Eres humano?",
+        label="?Captcha?",
     )
 
 

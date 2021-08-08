@@ -1,0 +1,25 @@
+extends base.pug
+
+- load i18n
+
+block options
+  if perms.games.change_game
+    a.btn.btn-sm.btn-outline-secondary(href="{% url 'game_update' game.id %}")
+      {% trans 'Update game' %}
+      i.fa.fa-edit
+  if perms.games.delete_game
+    a.btn.btn-sm.btn-danger(href="{% url 'game_delete' game.id %}")
+      {% trans 'Delete game' %}
+      i.fa.fa-times
+
+block breadcrumbs
+  li.breadcrumb-item
+    a(href="{% url 'game_list' %}")
+      | {{opts.verbose_name_plural|capfirst}}
+
+block content
+  table.table.table-striped.table-hover.table-sm
+    tbody
+      tr
+        th Id
+        td {{game.id}}
